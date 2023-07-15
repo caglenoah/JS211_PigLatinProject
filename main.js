@@ -42,6 +42,8 @@ const isVowel = (letter) => {
   return vowels.includes(letter);
 };
 
+
+
 //prompts the user to enter a word
 //calls our bucket 'rl' which holds our readline variable
 rl.question('Enter a word: ', (answer) => {
@@ -53,26 +55,3 @@ rl.question('Enter a word: ', (answer) => {
   rl.close();
 });
 
-
-
-// // **********
-// //   HINTS
-// // **********
-
-// // break your code into pieces and focus on one piece at a time...
-// // 1. if word begins with a vowel send to one function: adds "yay"
-// // 2. if word begins with a consonant send to another function: splices off beginning, returns word with new ending.
-// // 3. if multiple words, create array of words, loop over them, sending them to different functions and creating a new array with the new words.
-
-
-
-//NOTES-----------------------------------
-//Answer you own questions
-//----
-
-
-// Do i have a function looking for a vowel?
-// should i be using const instead of let do define inputWord and vowels? or does it need to be flexible?
-              //check by changing it and see what happens.
-// test to see if the function is checking for empty inputs 
-              //try putting in an empty input!    
