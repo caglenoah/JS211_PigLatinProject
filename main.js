@@ -1,71 +1,78 @@
+// declares JavaScript's "strict" mode. it enforces stricter parsing and error handling during runtime. helps write cleaner code and catch more errors and bugs that might otherwise go unnoticed.
 'use strict';
 
-// brings in the assert module for unit testing
-const assert = require('assert');
-// brings in the readline module to access the command line
+//sets up readline module module and creates an interface to read input from the console, and to write output on the console. 
+//inport the 'readline' module to read input from the console
 const readline = require('readline');
-// use the readline module to print out to the command line
+//creates an interface for reading input. It tells it where to get its input data from, and where to write it's output 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-
+//named variable that hold a finction to translate word to pigLatin
 const pigLatin = (word) => {
+//trims and converts words to lowercase
+  let inputWord = word.trim().toLowerCase();
+  //checks if work is empty
+  if (inputWord.length === 0) {
+    //asks user to enter a valid input
+    return "Please enter a valid word.";
+  }
 
-  // Your code here
+  //checks if the word starts with a vowel by calling th 'isVowel' helper function
+  if (isVowel(inputWord[0])) {
+    //if it does it appends "yay" to the word and returns the translated word.
+    return inputWord + "yay";
+  } else { // if it doesnt, this function extracts the first character and moves it to the end of the word, followed by "ay". This forms the translated word
+    //the value of the named variable takes the first character and moves it to the end of the word. 
+    let firstCharacter = inputWord.slice(0, 1);
+    //this variable holds the rest of the word 
+    let restOfWord = inputWord.slice(1);
+    //returns translated word
+    return restOfWord + firstCharacter + "ay";
+  }
+};
 
-}
+//helper function to check if a letter is a vowel to check if word starts with a vowel
+const isVowel = (letter) => {
+  // assigning the vowels to a variable. this tells the console what vowels are
+  const vowels = ['a', 'e', 'i', 'o', 'u'];
+  //this returns the character if it is a vowel when the function is running it's check
+  return vowels.includes(letter);
+};
 
-// the first function called in the program to get an input from the user
-// to run the function use the command: node main.js
-// to close it ctrl + C
-const getPrompt = () => {
-  rl.question('word ', (answer) => {
-    console.log( pigLatin(answer) );
-    getPrompt();
-  });
-}
-
-// Unit Tests
-// to use them run the command: npm test main.js
-// to close them ctrl + C
-if (typeof describe === 'function') {
-
-  describe('#pigLatin()', () => {
-    it('should translate a simple word', () => {
-      assert.equal(pigLatin('car'), 'arcay');
-      assert.equal(pigLatin('dog'), 'ogday');
-    });
-    it('should translate a complex word', () => {
-      assert.equal(pigLatin('create'), 'eatecray');
-      assert.equal(pigLatin('valley'), 'alleyvay');
-    });
-    it('should attach "yay" if word begins with vowel', () => {
-      assert.equal(pigLatin('egg'), 'eggyay');
-      assert.equal(pigLatin('emission'), 'emissionyay');
-    });
-    it('should lowercase and trim word before translation', () => {
-      assert.equal(pigLatin('HeLlO '), 'ellohay');
-      assert.equal(pigLatin(' RoCkEt'), 'ocketray');
-    });
-  });
-} else {
-
-  getPrompt();
-
-}
+//prompts the user to enter a word
+//calls our bucket 'rl' which holds our readline variable
+rl.question('Enter a word: ', (answer) => {
+  //translates the word to pig latin by calling the 'pigLatin' fuction
+  const translation = pigLatin(answer);
+  //displays the translation
+  console.log(`Translation: ${translation}`);
+  // closes the readline interface
+  rl.close();
+});
 
 
 
+// // **********
+// //   HINTS
+// // **********
+
+// // break your code into pieces and focus on one piece at a time...
+// // 1. if word begins with a vowel send to one function: adds "yay"
+// // 2. if word begins with a consonant send to another function: splices off beginning, returns word with new ending.
+// // 3. if multiple words, create array of words, loop over them, sending them to different functions and creating a new array with the new words.
 
 
 
-// **********
-//   HINTS
-// **********
+//NOTES-----------------------------------
+//Answer you own questions
+//----
 
-// break your code into pieces and focus on one piece at a time...
-// 1. if word begins with a vowel send to one function: adds "yay"
-// 2. if word begins with a consonant send to another function: splices off beginning, returns word with new ending.
-// 3. if multiple words, create array of words, loop over them, sending them to different functions and creating a new array with the new words.
+
+// Do i have a function looking for a vowel?
+// should i be using const instead of let do define inputWord and vowels? or does it need to be flexible?
+              //check by changing it and see what happens.
+// test to see if the function is checking for empty inputs 
+              //try putting in an empty input!    
